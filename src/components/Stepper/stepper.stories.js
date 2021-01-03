@@ -36,6 +36,14 @@ export default {
         defaultValue: { summary: '({ data }) => data' },
       },
     },
+    theme: {
+      control: 'object',
+      description: 'Stepper theme',
+      defaultValue: Stepper.defaultProps.theme,
+      table: {
+        defaultValue: { summary: JSON.stringify(Stepper.defaultProps.theme) },
+      },
+    },
     className: {
       control: 'text',
       description: 'stepper className',
