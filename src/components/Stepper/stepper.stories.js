@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { withPropsTable } from 'storybook-addon-react-docgen';
 import { ifProp } from 'styled-tools';
 import Stepper from './Stepper';
 
@@ -47,12 +46,6 @@ export default {
     className: {
       control: 'text',
       description: 'stepper className',
-    },
-  },
-  decorators: [withPropsTable],
-  parameters: {
-    props: {
-      propTablesInclude: [Stepper],
     },
   },
 };

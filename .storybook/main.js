@@ -15,6 +15,5 @@ module.exports = {
   addons: [
     '@storybook/addon-essentials',
     '@storybook/addon-storysource',
-    'storybook-addon-react-docgen',
   ],
 };
