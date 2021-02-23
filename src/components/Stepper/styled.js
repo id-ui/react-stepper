@@ -1,36 +1,10 @@
 import styled from 'styled-components';
-import { prop, withProp } from 'styled-tools';
+import { ifProp, prop } from 'styled-tools';
 
 export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  position: relative;
-  &::before,
-  &::after {
-    content: '';
-    z-index: 1;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    right: 0;
-    height: ${prop('theme.progressWidth')}px;
-  }
-  &::before {
-    left: 0;
-    right: calc(
-      ${withProp('progress', (progress) => 100 - progress)}% +
-        ${prop('theme.stepSize')}px
-    );
-    background-color: ${prop('theme.colors.progress.completed')};
-    transition: right ${prop('theme.progressTransitionDuration')}ms;
-  }
-  &::after {
-    left: calc(${prop('progress')}% - ${prop('theme.stepSize')}px);
-    right: 0;
-    background-color: ${prop('theme.colors.progress.default')};
-    transition: left ${prop('theme.progressTransitionDuration')}ms;
-  }
 `;
 
 export const Step = styled.div`
@@ -44,4 +18,21 @@ export const Step = styled.div`
 
 export const StepContent = styled.div`
   z-index: 3;
+`;
+
+export const Line = styled.div`
+  position: relative;
+  flex: 1;
+  height: ${prop('theme.progressWidth')}px;
+  background-color: ${prop('theme.colors.progress.default')};
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: ${ifProp('completed', 0, '100%')};
+    transition: right ${prop('theme.progressTransitionDuration')}ms;
+    background-color: ${prop('theme.colors.progress.completed')};
+  }
 `;

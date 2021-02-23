@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import ProgressCircle from './components/ProgressCircle';
-import { Container, Step, StepContent } from './styled';
+import { Container, Step, StepContent, Line } from './styled';
 import defaultTheme from './theme';
 
 function Stepper({
@@ -25,23 +25,28 @@ function Stepper({
           index < currentStepIndex ||
           (index === currentStepIndex && currentStepProgress == 100);
         return (
-          <Step key={index} completed={isCompleted} size={theme.stepSize}>
-            <ProgressCircle
-              diameter={theme.stepSize}
-              progress={
-                index === currentStepIndex
-                  ? currentStepProgress
-                  : isCompleted
-                  ? 100
-                  : 0
-              }
-              theme={theme}
-              completed={isCompleted}
-            />
-            <StepContent>
-              {renderStep({ data: step, index, completed: isCompleted })}
-            </StepContent>
-          </Step>
+          <Fragment key={index}>
+            {index !== 0 && (
+              <Line theme={theme} completed={index <= currentStepIndex} />
+            )}
+            <Step completed={isCompleted} size={theme.stepSize}>
+              <ProgressCircle
+                diameter={theme.stepSize}
+                progress={
+                  index === currentStepIndex
+                    ? currentStepProgress
+                    : isCompleted
+                    ? 100
+                    : 0
+                }
+                theme={theme}
+                completed={isCompleted}
+              />
+              <StepContent>
+                {renderStep({ data: step, index, completed: isCompleted })}
+              </StepContent>
+            </Step>
+          </Fragment>
         );
       })}
     </Container>
